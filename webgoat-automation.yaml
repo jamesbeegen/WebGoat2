@@ -3,7 +3,7 @@ env:
   contexts:
   - name: "baseline"
     urls:
-    - "http://webgoat:8080/WebGoat/start.mvc#lesson/WebWolfIntroduction.lesson"
+    - "http://webgoat:8080/WebGoat/"
     excludePaths: []
     authentication:
       method: "form"
@@ -44,7 +44,7 @@ jobs:
 - parameters:
     context: "baseline"
     user: "zap-test"
-    url: "http://webgoat:8080/WebGoat/start.mvc#lesson/WebWolfIntroduction.lesson"
+    url: "http://webgoat:8080/WebGoat/"
     maxDuration: 2
     maxDepth: 0
   name: "spider"
@@ -59,7 +59,7 @@ jobs:
 - parameters:
     context: "baseline"
     user: "zap-test"
-    url: "http://webgoat:8080/WebGoat/start.mvc#lesson/WebWolfIntroduction.lesson"
+    url: "http://webgoat:8080/WebGoat/"
     clickElemsOnce: false
     maxDuration: 1
     maxCrawlDepth: 0
