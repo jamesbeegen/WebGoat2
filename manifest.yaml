@@ -10,7 +10,7 @@ spec:
   - name: regcred
   containers:
   - name: webgoat
-    image: cgi-webgoat:4
+    image: cgi-webgoat:test
     imagePullPolicy: Never
     ports:
     - containerPort: 8080
