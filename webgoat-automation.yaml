@@ -1,0 +1,91 @@
+---
+env:
+  contexts:
+  - name: "baseline"
+    urls:
+    - "http://webgoat:8080/WebGoat/"
+    excludePaths: []
+    authentication:
+      method: "form"
+      parameters:
+        loginRequestBody: "username={%username%}&password={%password%}"
+        loginPageUrl: "http://webgoat:8080/WebGoat/login"
+        loginRequestUrl: "http://webgoat:8080/WebGoat/login"
+      verification:
+        method: "response"
+        loggedInRegex: "\\QThanks\\E"
+        loggedOutRegex: "\\QRegister new user\\E"
+    sessionManagement:
+      method: "cookie"
+      parameters: {}
+    users:
+    - name: "zap-test"
+      credentials:
+        password: "zap-test"
+        username: "zap-test"
+  parameters:
+    failOnError: true
+    failOnWarning: false
+    progressToStdout: false
+  vars: {}
+jobs:
+- type: "addOns"
+  parameters:
+    updateAddOns: true
+  install:
+    - packscanrules
+- parameters:
+    maxAlertsPerRule: 0
+    scanOnlyInScope: true
+    enableTags: true
+  rules: []
+  name: "passiveScan-config"
+  type: "passiveScan-config"
+- parameters:
+    context: "baseline"
+    user: "zap-test"
+    url: "http://webgoat:8080/WebGoat/"
+    maxDuration: 2
+    maxDepth: 0
+  name: "spider"
+  type: "spider"
+  tests:
+  - onFail: "INFO"
+    statistic: "stats.auth.failure"
+    operator: "=="
+    value: 0
+    name: "auth"
+    type: "stats"
+- parameters:
+    context: "baseline"
+    user: "zap-test"
+    url: "http://webgoat:8080/WebGoat/"
+    clickElemsOnce: false
+    maxDuration: 1
+    maxCrawlDepth: 0
+    numberOfBrowsers: 5
+  name: "spiderAjax"
+  type: "spiderAjax"
+- parameters:
+    maxDuration: 0
+  name: "passiveScan-wait"
+  type: "passiveScan-wait"
+- type: "activeScan"
+  parameters:
+    context: "baseline"
+    user: "zap-test"
+    maxScanDurationInMins: 1
+- parameters:
+    format: "LONG"
+    summaryFile: "/home/zap/zap_out.json"
+  rules: []
+  name: "outputSummary"
+  type: "outputSummary"
+- parameters:
+    template: "traditional-json"
+    reportDir: "/home/jenkins/agent/workspace/zap-testing"
+    reportFile: "webgoat-zap-scan.json"
+    reportTitle: "ZAP Scanning Report"
+    reportDescription: ""
+  name: "report"
+  type: "report"
