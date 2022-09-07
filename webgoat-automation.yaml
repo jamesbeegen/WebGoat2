@@ -3,7 +3,7 @@ env:
   contexts:
   - name: "baseline"
     urls:
-    - "http://webgoat:8080/WebGoat/"
+    - "http://webgoat:8080/WebGoat/start.mvc#lesson/"
     excludePaths: []
     authentication:
       method: "form"
@@ -44,7 +44,7 @@ jobs:
 - parameters:
     context: "baseline"
     user: "zap-test"
-    url: "http://webgoat:8080/WebGoat/"
+    url: "http://webgoat:8080/WebGoat/start.mvc#lesson/"
     maxDuration: 2
     maxDepth: 0
   name: "spider"
@@ -59,7 +59,7 @@ jobs:
 - parameters:
     context: "baseline"
     user: "zap-test"
-    url: "http://webgoat:8080/WebGoat/"
+    url: "http://webgoat:8080/WebGoat/start.mvc#lesson/"
     clickElemsOnce: false
     maxDuration: 1
     maxCrawlDepth: 0
@@ -83,7 +83,7 @@ jobs:
   type: "outputSummary"
 - parameters:
     template: "traditional-json"
-    reportDir: "/home/jenkins/agent/workspace/test"
+    reportDir: "/home/jenkins/agent/workspace/DAST-SAST"
     reportFile: "webgoat-zap-scan.json"
     reportTitle: "ZAP Scanning Report"
     reportDescription: ""
