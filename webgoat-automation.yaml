@@ -61,7 +61,7 @@ jobs:
     user: "zap-test"
     url: "http://webgoat:8080/WebGoat"
     clickElemsOnce: false
-    maxDuration: 1
+    maxDuration: 5
     maxCrawlDepth: 0
     numberOfBrowsers: 5
   name: "spiderAjax"
@@ -74,7 +74,7 @@ jobs:
   parameters:
     context: "baseline"
     user: "zap-test"
-    maxScanDurationInMins: 1
+    maxScanDurationInMins: 5
 - parameters:
     format: "LONG"
     summaryFile: "/home/zap/zap_out.json"
@@ -83,7 +83,7 @@ jobs:
   type: "outputSummary"
 - parameters:
     template: "traditional-json"
-    reportDir: "/home/jenkins/agent/workspace/test"
+    reportDir: "/home/jenkins/agent/workspace/DAST-SAST"
     reportFile: "webgoat-zap-scan.json"
     reportTitle: "ZAP Scanning Report"
     reportDescription: ""
