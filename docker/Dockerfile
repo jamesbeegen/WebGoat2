@@ -3,7 +3,12 @@ FROM openjdk:11.0.1-jre-slim-stretch
 ARG webgoat_version=v8.0.0-SNAPSHOT
 ENV webgoat_version_env=${webgoat_version}
 
-RUN apt-get update && apt-get upgrade -y && apt-get -y install apt apt-utils nginx
+# Add this to be able to install nginx
+RUN wget https://nginx.org/keys/nginx_signing.key && apt-key add nginx_signing.key
+RUN echo "deb https://nginx.org/packages/mainline/debian/ bullseye nginx" >> /etc/apt/sources.list
+RUN echo "deb-src https://nginx.org/packages/mainline/debian/ bullseye nginx" >> /etc/apt/sources.list
+
+RUN apt-get update && apt-get upgrade -y && apt-get -y install nginx
 RUN useradd --home-dir /home/webgoat --create-home -U webgoat
 
 
