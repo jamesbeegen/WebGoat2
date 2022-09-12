@@ -3,9 +3,9 @@ FROM openjdk:11.0.1-jre-slim-stretch
 ARG webgoat_version=v8.0.0-SNAPSHOT
 ENV webgoat_version_env=${webgoat_version}
 
-RUN apt-get update && apt-get install 
+RUN apt-get update && apt-get upgrade -y
 RUN useradd --home-dir /home/webgoat --create-home -U webgoat
-RUN apt-get -y install apt-utils nginx
+RUN apt-get -y install nginx
 
 USER webgoat
 RUN cd /home/webgoat/; mkdir -p .webgoat-${webgoat_version}
