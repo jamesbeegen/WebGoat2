@@ -3,7 +3,7 @@ FROM alpine:latest
 ARG webgoat_version=v8.0.0-SNAPSHOT
 ENV webgoat_version_env=${webgoat_version}
 
-RUN apk update && apk upgrade
+
 RUN apk --no-cache add curl wget openjdk11 nginx
 
 # Add this to be able to install nginx
