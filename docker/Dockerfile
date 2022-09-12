@@ -1,15 +1,18 @@
-FROM openjdk:11.0.1-jre-slim-stretch
+FROM alpine:latest
 
 ARG webgoat_version=v8.0.0-SNAPSHOT
 ENV webgoat_version_env=${webgoat_version}
 
-# Add this to be able to install nginx
-RUN wget https://nginx.org/keys/nginx_signing.key && apt-key add nginx_signing.key
-RUN echo "deb https://nginx.org/packages/mainline/debian/ bullseye nginx" >> /etc/apt/sources.list
-RUN echo "deb-src https://nginx.org/packages/mainline/debian/ bullseye nginx" >> /etc/apt/sources.list
+RUN apk update && apk upgrade
+RUN apk --no-cache add curl wget openjdk11 nginx
 
-RUN apt-get update && apt-get upgrade -y && apt-get -y install nginx
-RUN useradd --home-dir /home/webgoat --create-home -U webgoat
+# Add this to be able to install nginx
+#RUN wget https://nginx.org/keys/nginx_signing.key && apt-key add nginx_signing.key
+#RUN echo "deb https://nginx.org/packages/mainline/debian/ bullseye nginx" >> /etc/apt/sources.list
+#RUN echo "deb-src https://nginx.org/packages/mainline/debian/ bullseye nginx" >> /etc/apt/sources.list
+
+#RUN apt-get update && apt-get upgrade -y && apt-get -y install nginx
+RUN adduser --home-dir /home/webgoat --create-home -U webgoat
 
 
 USER webgoat
@@ -30,6 +33,6 @@ ENV WEBGOAT_SSLENABLED false
 ENV GOATURL https://127.0.0.1:$WEBGOAT_PORT
 ENV WOLFURL http://127.0.0.1:9090
 
-
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 WORKDIR /home/webgoat
 ENTRYPOINT /bin/bash /home/webgoat/start.sh $webgoat_version_env
