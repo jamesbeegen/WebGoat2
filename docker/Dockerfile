@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.16
 
 ARG webgoat_version=v8.0.0-SNAPSHOT
 ENV webgoat_version_env=${webgoat_version}
