@@ -45,7 +45,7 @@ jobs:
     context: "baseline"
     user: "zap-test"
     url: "http://webgoat:8080/WebGoat/"
-    maxDuration: 2
+    maxDuration: 10
     maxDepth: 0
   name: "spider"
   type: "spider"
@@ -61,7 +61,7 @@ jobs:
     user: "zap-test"
     url: "http://webgoat:8080/WebGoat/"
     clickElemsOnce: false
-    maxDuration: 5
+    maxDuration: 15
     maxCrawlDepth: 0
     numberOfBrowsers: 5
   name: "spiderAjax"
@@ -74,7 +74,7 @@ jobs:
   parameters:
     context: "baseline"
     user: "zap-test"
-    maxScanDurationInMins: 5
+    maxScanDurationInMins: 30
 - parameters:
     format: "LONG"
     summaryFile: "/home/zap/zap_out.json"
