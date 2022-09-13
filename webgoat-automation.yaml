@@ -83,7 +83,7 @@ jobs:
   type: "outputSummary"
 - parameters:
     template: "traditional-json"
-    reportDir: "/home/jenkins/agent/workspace/DAST-SAST"
+    reportDir: "/home/jenkins/agent/workspace/DAST-SAST-OSCA"
     reportFile: "webgoat-zap-scan.json"
     reportTitle: "ZAP Scanning Report"
     reportDescription: ""
