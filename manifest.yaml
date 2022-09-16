@@ -10,8 +10,8 @@ spec:
   - name: regcred
   containers:
   - name: webgoat
-    image: cgi-webgoat:test
-    imagePullPolicy: Never
+    image: 095739726678.dkr.ecr.us-west-2.amazonaws.com/webgoat:latest
+    imagePullPolicy: Always
     ports:
     - containerPort: 8080
 ---
